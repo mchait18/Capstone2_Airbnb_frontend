@@ -24,7 +24,7 @@ function NavBar({ logout }) {
                 </li>
                 <li className="nav-item mr-4">
                     <NavLink className="nav-link" to="/bookings">
-                        My Bookings
+                        My Trips
                     </NavLink>
                 </li>
                 <li className="nav-item mr-4">

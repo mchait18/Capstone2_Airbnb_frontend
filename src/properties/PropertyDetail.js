@@ -1,16 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link } from "react-router-dom";
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams, Link, useLocation, useNavigate } from "react-router-dom";
 import ImageCarousel from "./ImageCarousel"
 import AirbnbApi from "../AirbnbApi";
 import BookingForm from '../bookings/BookingForm';
-import { v4 as uuid } from 'uuid';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+import UserContext from "../auth/UserContext";
+import Container from 'react-bootstrap/Container';
 
 function PropertyDetail() {
-    const { propertyId } = useParams()
-    const [property, setProperty] = useState(null);
     const [formErrors, setFormErrors] = useState([]);
+    const navigate = useNavigate();
+    const { propertyId } = useParams()
+    const useQuery = () => new URLSearchParams(useLocation().search);
+    const query = useQuery();
+    const checkIn = query.get("checkIn")
+    const checkOut = query.get("checkOut")
+    const [property, setProperty] = useState(null);
+    const { currentUser } = useContext(UserContext);
 
     useEffect(() => {
         async function getProp() {
@@ -21,12 +28,19 @@ function PropertyDetail() {
     }, [propertyId])
 
     console.log("property is ", property)
+
     async function createBooking(formData) {
         try {
             const booking = await AirbnbApi.createBooking({
-                bookingId: uuid(),
-                propertyId, ...formData
+                userId: currentUser.id,
+                propertyId: propertyId,
+                imageUrl: property.imageUrl,
+                location: property.location,
+                host: property.bookingData.hostName,
+                ...formData
             });
+            navigate(`/bookings/${booking.id}`)
+
         } catch (errors) {
             console.log("errors are ", errors)
             setFormErrors(errors)
@@ -41,26 +55,30 @@ function PropertyDetail() {
 
     return (
         <div>
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={property.imageUrl} />
-                <Card.Body>
-                    <Card.Title>{property.title}</Card.Title>
-                    <Card.Text>
-                        <Link to={`/properties/reviews/${propertyId}`} >
-                            <h6>{property.bookingData.reviewsCount} reviews</h6>
-                        </Link>
-                    </Card.Text>
-                </Card.Body>
-                <ListGroup className="list-group-flush">
+            <Container fluid>
+                <Card style={{ width: '18rem' }}>
+                    <Card.Title>{property.sections.title.title}</Card.Title>
+                    <Card.Img variant="top" src={property.imageUrl} />
+                    <Card.Body>
+                        <Card.Title>{property.title}</Card.Title>
+                        <Card.Text>
+                            <Link to={`/properties/reviews/${propertyId}`} >
+                                {property.bookingData.reviewsCount} reviews
+                            </Link>
+                        </Card.Text>
+                    </Card.Body>
                     <Card.Img style={{ height: '5rem', width: '5rem' }} src={property.bookingData.hostProfilePhotoUrl} />
                     <ListGroup.Item>Hosted by {property.bookingData.hostName}</ListGroup.Item>
-                    <ListGroup.Item><BookingForm createBooking={createBooking} propertyId={propertyId} /></ListGroup.Item>
-                    <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-                </ListGroup>
-                <Card.Body>
+                    <ListGroup.Item><BookingForm
+                        propertyId={propertyId}
+                        checkIn={checkIn}
+                        checkOut={checkOut}
+                        createBooking={createBooking} /></ListGroup.Item>
+                    <Card.Body>
 
-                </Card.Body>
-            </Card>
+                    </Card.Body>
+                </Card>
+            </Container>
             {/* <img src={property.imageUrl}
                 alt={property.title}
             // className="float-right ml-5"

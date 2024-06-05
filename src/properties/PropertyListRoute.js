@@ -33,12 +33,12 @@ function ProperyListRoute() {
     if (!properties) {
         return <p>Loading &hellip;</p>;
     }
-
     return (
         <div className="">
             {formErrors.length
                 ? <Alert type="danger" messages={["Please fill out all required fields"]} />
-                : < PropertyList properties={properties} />
+                : < PropertyList properties={properties} checkIn={checkin}
+                    checkOut={checkout} />
             }
         </div>
     )

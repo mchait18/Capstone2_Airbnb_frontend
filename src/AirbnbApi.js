@@ -56,14 +56,22 @@ class AirbnbApi {
 
     static async createBooking(bookingData) {
         let res = await this.request('bookings', bookingData, "post");
-        return res.property.data;
+        return res.booking;
     }
     static async checkPrice(bookingData) {
         let res = await this.request('bookings/checkPrice', bookingData);
-        console.log("in checkPrice AirbnbApi, res is ", res)
-        return res.data;
+        return res.price;
     }
 
+    static async getBookings() {
+        let res = await this.request('bookings')
+        return res.bookings;
+    }
+
+    static async getBooking(bookingId) {
+        let res = await this.request(`bookings/${bookingId}`);
+        return res.booking;
+    }
     /* returns current user */
     static async getCurrentUser(username) {
         let res = await this.request(`users/${username}`);
@@ -75,7 +83,7 @@ class AirbnbApi {
     }
     static async login(loginData) {
         let res = await this.request("auth/token", loginData, "post");
-        console.log("in login, res.token is ", res.token)
+        // console.log("in login, res.token is ", res.token)
         return res.token;
     }
 

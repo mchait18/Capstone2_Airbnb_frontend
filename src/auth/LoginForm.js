@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Alert from "../common/Alert";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function LoginForm({ login }) {
     const navigate = useNavigate();
@@ -76,6 +76,8 @@ function LoginForm({ login }) {
                             >
                                 Submit
                             </button>
+                            <br></br>
+                            <Link style={{ textDecoration: 'none' }} to={`/signup`} >New User? Sign up <u>here</u></Link>
                         </form>
                     </div>
                 </div>
