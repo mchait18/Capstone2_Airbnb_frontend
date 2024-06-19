@@ -14,7 +14,7 @@ import Row from 'react-bootstrap/Row';
  * Routes -> { PropertyCard }
  */
 
-function PropertyList({ properties, checkIn, checkOut }) {
+function PropertyList({ properties, checkIn, checkOut, favorites, toggleFavorites }) {
     console.log("in ProperyList, properties is ", properties)
 
     if (!properties) return <LoadingSpinner />;
@@ -25,7 +25,11 @@ function PropertyList({ properties, checkIn, checkOut }) {
                 <Row xs={2} md={3} lg={4} xl={4} xxl={6} className="g-4" style={{ padding: '2rem', paddingTop: '2rem' }}>
                     {properties.map(prop => (
                         <Col key={prop.listing.id}>
-                            <PropertyCard property={prop} checkIn={checkIn} checkOut={checkOut} />
+                            <PropertyCard property={prop}
+                                checkIn={checkIn}
+                                checkOut={checkOut}
+                                isFavorite={favorites && favorites.some(e => e.propertyId === prop.listing.id)}
+                                toggleFavorites={toggleFavorites} />
                         </Col>
                     ))}
                 </Row>

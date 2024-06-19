@@ -4,9 +4,12 @@ import ImageCarousel from "./ImageCarousel"
 import AirbnbApi from "../AirbnbApi";
 import BookingForm from '../bookings/BookingForm';
 import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
 import UserContext from "../auth/UserContext";
 import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 function PropertyDetail() {
     const [formErrors, setFormErrors] = useState([]);
@@ -18,11 +21,11 @@ function PropertyDetail() {
     const checkOut = query.get("checkOut")
     const [property, setProperty] = useState(null);
     const { currentUser } = useContext(UserContext);
+    const [modalShow, setModalShow] = React.useState(false);
 
     useEffect(() => {
         async function getProp() {
             setProperty(await AirbnbApi.getProperty(propertyId))
-            // setReviews(await AirbnbApi.getPropertyReviews(propertyId))
         }
         getProp(propertyId);
     }, [propertyId])
@@ -49,6 +52,29 @@ function PropertyDetail() {
         setFormErrors([]);
     }
 
+    function MyVerticallyCenteredModal(props) {
+        return (
+            <Modal
+                {...props}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        Reviews
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {/* <h4>Centered Modal</h4> */}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={props.onHide}>Close</Button>
+                </Modal.Footer>
+            </Modal>
+        );
+    }
+
     if (!property) {
         return <p>Loading &hellip;</p>;
     }
@@ -56,45 +82,49 @@ function PropertyDetail() {
     return (
         <div>
             <Container fluid>
-                <Card style={{ width: '18rem' }}>
-                    <Card.Title>{property.sections.title.title}</Card.Title>
-                    <Card.Img variant="top" src={property.imageUrl} />
-                    <Card.Body>
-                        <Card.Title>{property.title}</Card.Title>
-                        <Card.Text>
-                            <Link to={`/properties/reviews/${propertyId}`} >
-                                {property.bookingData.reviewsCount} reviews
-                            </Link>
-                        </Card.Text>
-                    </Card.Body>
-                    <Card.Img style={{ height: '5rem', width: '5rem' }} src={property.bookingData.hostProfilePhotoUrl} />
-                    <ListGroup.Item>Hosted by {property.bookingData.hostName}</ListGroup.Item>
-                    <ListGroup.Item><BookingForm
-                        propertyId={propertyId}
-                        checkIn={checkIn}
-                        checkOut={checkOut}
-                        createBooking={createBooking} /></ListGroup.Item>
-                    <Card.Body>
-
-                    </Card.Body>
-                </Card>
+                <Row>
+                    <Col key="0" >
+                        <Card border="white" style={{ width: '30rem', height: '30rem' }}>
+                            <Card.Title><h2>{property.sections.title.title}</h2></Card.Title>
+                            <Card.Img variant="top" src={property.imageUrl} />
+                            <Card.Body>
+                                <Card.Title>{property.title}</Card.Title>
+                                <Card.Text>
+                                    <Button variant="light" onClick={() =>
+                                        // setModalShow(true)
+                                        navigate(`/properties/reviews/${propertyId}`)
+                                    }>
+                                        {property.bookingData.reviewsCount} reviews
+                                    </Button>
+                                    <MyVerticallyCenteredModal
+                                        show={modalShow}
+                                        onHide={() => setModalShow(false)}
+                                    />
+                                </Card.Text>
+                            </Card.Body>
+                            <Card.Img style={{ height: '5rem', width: '5rem' }} src={property.bookingData.hostProfilePhotoUrl} />
+                            <Card.Text>Hosted by {property.bookingData.hostName}</Card.Text>
+                        </Card>
+                    </Col>
+                    <Col key="0" >
+                        <Card style={{ width: '40rem' }} border="white" >
+                            <div className='mt-5 pt-4'>
+                                <ImageCarousel
+                                    photos={property.sections.photoTour.mediaItems}
+                                    title="" />
+                            </div>
+                            <Card.Body>
+                                <BookingForm
+                                    propertyId={propertyId}
+                                    checkIn={checkIn}
+                                    checkOut={checkOut}
+                                    createBooking={createBooking} />
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
             </Container>
-            {/* <img src={property.imageUrl}
-                alt={property.title}
-            // className="float-right ml-5"
-            />
-            <ImageCarousel
-                photos={property.sections.photoTour.mediaItems}
-                title="" />
-            <h4>{property.title}</h4>
-            <Link to={`/properties/reviews/${propertyId}`} >
-                <h6>{property.bookingData.reviewsCount} reviews</h6>
-            </Link>
-            <img src={property.bookingData.hostProfilePhotoUrl}
-                alt={property.bookingData.hostName} />
-            <h5>Hosted by {property.bookingData.hostName}</h5>
-            <BookingForm createBooking={createBooking} propertyId={propertyId} /> */}
-        </div>
+        </div >
     );
 }
 

@@ -19,7 +19,8 @@ class AirbnbApi {
         //there are multiple ways to pass an authorization token, this is how you pass it in the header.
         //this has been provided to show you another way to pass the token. you are only expected to read this code for this project.
         const url = `${BASE_URL}/${endpoint}`;
-        const headers = { Authorization: `Bearer ${AirbnbApi.token}` };
+        const headers = { Authorization: `Bearer ${localStorage.getItem("airbnb-token")}` };
+        console.log("headers is ", headers)
         const params = (method === "get")
             ? data
             : {};
@@ -62,7 +63,7 @@ class AirbnbApi {
         let res = await this.request('bookings/checkPrice', bookingData);
         return res.price;
     }
-
+    //bookings functions
     static async getBookings() {
         let res = await this.request('bookings')
         return res.bookings;
@@ -86,7 +87,22 @@ class AirbnbApi {
         // console.log("in login, res.token is ", res.token)
         return res.token;
     }
-
+    // favorites functions
+    static async getFavorites(token) {
+        let res = await this.request(`properties/favorites/${token}`)
+        console.log()
+        return res.favorites;
+    }
+    static async getFavorite(favoriteId) {
+        let res = await this.request(`properties/favorite/${favoriteId}`)
+        console.log()
+        return res.favorite;
+    }
+    //add/remove favorite
+    static async toggleFavorites(token, favoriteData) {
+        let res = await this.request(`properties/favorites/${token}`, favoriteData, "post");
+        // return res.booking;
+    }
     static async saveProfile(username, profileData) {
         let status = await this.checkPassword(username, profileData.password)
         if (status.msg === "Success") {

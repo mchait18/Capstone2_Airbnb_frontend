@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Carousel.css";
-import Card from "./Card";
+import CarouselCard from "./CarouselCard";
 
 
 /** Carousel: displays images and arrows to navigate through them
@@ -40,7 +40,7 @@ function ImageCarousel({ photos, title }) {
             className="bi bi-arrow-left-circle"
             onClick={goBackward}
           />}
-        <Card
+        <CarouselCard
           caption={currCard.accessibilityLabel}
           src={currCard.baseUrl}
           currNum={currCardIdx + 1}

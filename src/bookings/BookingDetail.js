@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import AirbnbApi from "../AirbnbApi";
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
@@ -62,15 +62,18 @@ function BookingDetail() {
                         <Card >
                             <Card.Body>
                                 <ListGroup className="list-group-flush">
-                                    <ListGroup.Item>
-                                        <Card.Img src={property.imageUrl} style={{ width: '10rem', height: '10rem' }} />
-                                        <Card.Text>{property.title}</Card.Text>
-                                        <Card.Text>{property.roomType}</Card.Text>
-                                        {property.bookingData.isSuperHost && (
-                                            //pic of trophy and star
-                                            <Card.Text>Superhost</Card.Text>
-                                        )}
-                                    </ListGroup.Item>
+                                    <Link style={{ textDecoration: 'none' }}
+                                        to={`/properties/${booking.propertyId}`} >
+                                        <ListGroup.Item>
+                                            <Card.Img src={property.imageUrl} style={{ width: '10rem', height: '10rem' }} />
+                                            <Card.Text>{property.title}</Card.Text>
+                                            <Card.Text>{property.roomType}</Card.Text>
+                                            {property.bookingData.isSuperHost && (
+                                                //pic of trophy and star
+                                                <Card.Text>Superhost</Card.Text>
+                                            )}
+                                        </ListGroup.Item>
+                                    </Link>
                                     <ListGroup.Item>
                                         <Card.Title>Price Details</Card.Title>
                                         <Card.Text>{booking.priceTitle}</Card.Text>

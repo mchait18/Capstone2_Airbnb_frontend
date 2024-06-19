@@ -10,6 +10,7 @@ import PropertyDetail from "../properties/PropertyDetail"
 import PropertyListRoute from "../properties/PropertyListRoute"
 import BookingDetail from "../bookings/BookingDetail";
 import BookingList from "../bookings/BookingList"
+import FavoritesList from "../properties/FavoritesList"
 
 function RouteList({ login, signup }) {
     return (
@@ -19,9 +20,9 @@ function RouteList({ login, signup }) {
                 <Route exact path="/login" element={<LoginForm login={login} />} />
                 <Route exact path="/signup" element={<SignupForm signup={signup} />} />
                 <Route exact path="/properties" element={<PropertyListRoute />} />
+                <Route exact path="/properties/favorites" element={<FavoritesList />} />
                 <Route exact path="/bookings" element={<BookingList />} />
                 <Route exact path="/properties/reviews/:propertyId" element={<PropertyReviews />} />
-
                 {/* <PrivateRoute exact path="/jobs">
                     <JobList /> */}
                 {/* </PrivateRoute> */}
@@ -29,9 +30,9 @@ function RouteList({ login, signup }) {
                 <Route exact path="/properties/:propertyId" element={<PropertyDetail />} />
                 <Route exact path="/bookings/:bookingId" element={< BookingDetail />} />
                 {/* </Route> */}
-                <Route exact path="/profile" element={<PrivateRoute />} >
-                    <Route exact path="/profile" element={<ProfileForm />} />
-                </Route>
+                {/* <Route exact path="/profile" element={<PrivateRoute />} > */}
+                <Route exact path="/profile" element={<ProfileForm />} />
+                {/* </Route> */}
                 <Route element={<Navigate to="/" />} />
             </Routes >
         </main>
