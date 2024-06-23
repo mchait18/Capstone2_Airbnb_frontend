@@ -26,7 +26,8 @@ function ProperyListRoute() {
                 setProperties(await AirbnbApi.getProperties({
                     location, checkin, checkout, adults
                 }))
-                setFavorites(await AirbnbApi.getFavorites(AirbnbApi.token))
+                if (currentUser)
+                    setFavorites(await AirbnbApi.getFavorites(AirbnbApi.token))
             } catch (errors) {
                 console.log("errors are ", errors)
                 setFormErrors(errors)
