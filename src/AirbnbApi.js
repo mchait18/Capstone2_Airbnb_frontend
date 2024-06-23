@@ -48,8 +48,22 @@ class AirbnbApi {
         return res.reviews.data;
     }
 
+    /**adds new listing */
+    static async addListing(listingData) {
+        let res = await this.request('properties', listingData, "post");
+        return res.property;
+    }
+    //gets user listings
+    static async getListings(token) {
+        let res = await this.request(`properties/listings/${token}`)
+        return res.listings;
+    }
+    //get one listing
+    static async getListing(propertyId) {
+        let res = await this.request(`properties/listing/${propertyId}`);
+        return res.listing;
+    }
     /** Get list of all properties. */
-
     static async getProperties(searchData) {
         let res = await this.request("properties", searchData);
         return res.properties;
@@ -79,6 +93,7 @@ class AirbnbApi {
         return res.user;
     }
     static async signup(signupData) {
+        console.log("in API func, signupdata is ", signupData)
         let res = await this.request("auth/register", signupData, "post");
         return res.token;
     }
@@ -88,6 +103,8 @@ class AirbnbApi {
         return res.token;
     }
     // favorites functions
+
+    //gets users favorites
     static async getFavorites(token) {
         let res = await this.request(`properties/favorites/${token}`)
         console.log()
@@ -95,7 +112,6 @@ class AirbnbApi {
     }
     static async getFavorite(favoriteId) {
         let res = await this.request(`properties/favorite/${favoriteId}`)
-        console.log()
         return res.favorite;
     }
     //add/remove favorite

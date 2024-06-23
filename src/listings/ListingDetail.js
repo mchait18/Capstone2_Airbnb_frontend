@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link, useLocation, useNavigate } from "react-router-dom";
-import ImageCarousel from "./ImageCarousel"
+import ImageCarousel from "../properties/ImageCarousel"
 import AirbnbApi from "../AirbnbApi";
 import BookingForm from '../bookings/BookingForm';
 import Card from 'react-bootstrap/Card';
@@ -11,46 +11,22 @@ import Row from 'react-bootstrap/Row';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-function PropertyDetail() {
+function ListingDetail() {
     const [formErrors, setFormErrors] = useState([]);
     const navigate = useNavigate();
     const { propertyId } = useParams()
-    const useQuery = () => new URLSearchParams(useLocation().search);
-    const query = useQuery();
-    const checkIn = query.get("checkIn")
-    const checkOut = query.get("checkOut")
-    const [property, setProperty] = useState(null);
+    const [listing, setListing] = useState(null);
     const { currentUser } = useContext(UserContext);
     const [modalShow, setModalShow] = React.useState(false);
 
     useEffect(() => {
         async function getProp() {
-            setProperty(await AirbnbApi.getProperty(propertyId))
+            setListing(await AirbnbApi.getListing(propertyId))
         }
         getProp(propertyId);
     }, [propertyId])
 
-    console.log("property is ", property)
-
-    async function createBooking(formData) {
-        try {
-            const booking = await AirbnbApi.createBooking({
-                userId: currentUser.id,
-                propertyId: propertyId,
-                imageUrl: property.imageUrl,
-                location: property.location,
-                host: property.bookingData.hostName,
-                ...formData
-            });
-            navigate(`/bookings/${booking.id}`)
-
-        } catch (errors) {
-            console.log("errors are ", errors)
-            setFormErrors(errors)
-            return
-        }
-        setFormErrors([]);
-    }
+    console.log("listing is ", listing)
 
     function MyVerticallyCenteredModal(props) {
         return (
@@ -75,7 +51,7 @@ function PropertyDetail() {
         );
     }
 
-    if (!property) {
+    if (!listing) {
         return <p>Loading &hellip;</p>;
     }
 
@@ -85,16 +61,16 @@ function PropertyDetail() {
                 <Row>
                     <Col key="0" >
                         <Card border="white" style={{ width: '30rem', height: '30rem' }}>
-                            <Card.Title><h2>{property.sections.title.title}</h2></Card.Title>
-                            <Card.Img variant="top" src={property.imageUrl} />
+                            <Card.Title><h2>{listing.title}</h2></Card.Title>
+                            <Card.Img variant="top" src={listing.imageUrl} />
                             <Card.Body>
-                                <Card.Title>{property.title}</Card.Title>
+                                <Card.Title>{listing.title}</Card.Title>
                                 <Card.Text>
                                     <Button variant="light" onClick={() =>
                                         // setModalShow(true)
                                         navigate(`/properties/reviews/${propertyId}`)
                                     }>
-                                        {property.bookingData.reviewsCount} reviews
+                                        {listing.reviewsCount} reviews
                                     </Button>
                                     <MyVerticallyCenteredModal
                                         show={modalShow}
@@ -102,24 +78,24 @@ function PropertyDetail() {
                                     />
                                 </Card.Text>
                             </Card.Body>
-                            <Card.Img style={{ height: '5rem', width: '5rem' }} src={property.bookingData.hostProfilePhotoUrl} />
-                            <Card.Text>Hosted by {property.bookingData.hostName}</Card.Text>
+                            <Card.Img style={{ height: '5rem', width: '5rem' }} src={listing.hostPhoto} />
+                            <Card.Text>Hosted by {listing.hostName}</Card.Text>
                         </Card>
                     </Col>
                     <Col key="1" >
                         <Card style={{ width: '40rem' }} border="white" >
-                            <div className='mt-5 pt-4'>
+                            {/* <div className='mt-5 pt-4'>
                                 <ImageCarousel
                                     photos={property.sections.photoTour.mediaItems}
                                     title="" />
-                            </div>
-                            <Card.Body>
+                            </div> */}
+                            {/* <Card.Body>
                                 <BookingForm
                                     propertyId={propertyId}
                                     checkIn={checkIn}
                                     checkOut={checkOut}
                                     createBooking={createBooking} />
-                            </Card.Body>
+                            </Card.Body> */}
                         </Card>
                     </Col>
                 </Row>
@@ -128,4 +104,4 @@ function PropertyDetail() {
     );
 }
 
-export default PropertyDetail;
+export default ListingDetail;

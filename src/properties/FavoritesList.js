@@ -50,7 +50,7 @@ function FavoritesList() {
                                     propertyId={favorite.propertyId}
                                     propertyName={favorite.propertyName}
                                     rating={favorite.rating}
-                                    title={favorite.title}
+                                    // title={favorite.title}
                                     imageUrl={favorite.imageUrl}
                                 />
                             </Col>

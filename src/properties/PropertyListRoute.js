@@ -16,6 +16,7 @@ function ProperyListRoute() {
     const [properties, setProperties] = useState(null);
     const [formErrors, setFormErrors] = useState([]);
     const [favorites, setFavorites] = useState(null);
+    const [newStr, setNewStr] = useState("")
     const navigate = useNavigate();
     // console.log("in ProperyListRoute, currentUser is ", currentUser)
 
@@ -35,14 +36,18 @@ function ProperyListRoute() {
         }
         getPropertiesOnMount()
     }, [])
-    console.log("favorites are ", favorites)
+    // console.log("favorites are ", favorites)
     async function toggleFavorites(favoriteData) {
         if (!currentUser) {
             navigate('/login')
         } else {
+            console.log("favorites!!! are ", favorites)
             // console.log("in addtofavorites,favoriteData", favoriteData)
-            await AirbnbApi.toggleFavorites(AirbnbApi.token, favoriteData)
+            await AirbnbApi.toggleFavorites(AirbnbApi.token, favoriteData);
             setFavorites(await AirbnbApi.getFavorites(AirbnbApi.token))
+            // setNewStr("HELLO")
+            // setFavorites([])
+            console.log("favorites are ", favorites)
         }
     }
 
@@ -51,6 +56,7 @@ function ProperyListRoute() {
     }
     return (
         <div className="">
+            <h1>{newStr}</h1>
             {formErrors.length
                 ? <Alert type="danger" messages={["Please fill out all required fields"]} />
                 : < PropertyList properties={properties} checkIn={checkin}

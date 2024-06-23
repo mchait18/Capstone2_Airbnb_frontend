@@ -5,16 +5,17 @@ import { useNavigate } from "react-router-dom";
 
 function SignupForm({ signup }) {
     const navigate = useNavigate();
+    // const [isChecked, setIsChecked] = useState(false);
     const INITIAL_STATE = {
         username: "",
         password: "",
         firstName: "",
         lastName: "",
-        email: ""
+        email: "",
+        isOwner: false
     }
     const [formData, setFormData] = useState(INITIAL_STATE);
     const [formErrors, setFormErrors] = useState([]);
-
     // console.debug(
     //     "SignupForm",
     //     "signup=", typeof signup,
@@ -29,8 +30,20 @@ function SignupForm({ signup }) {
             [name]: value
         }))
     }
+
+    const handleCheckboxChange = (e) => {
+        console.log("handleCheckboxChange, before set formdata.isOwner is ", formData.isOwner)
+        // setIsChecked(!isChecked);
+
+        setFormData(formData => ({
+            ...formData, isOwner: !formData.isOwner
+        }))
+        console.log("handleCheckboxChange after set formdata.isOwner is ", formData.isOwner)
+    };
+
     async function handleSubmit(e) {
         e.preventDefault();
+
         let result = await signup({ id: uuid(), ...formData })
         if (result.success) {
             navigate("/")
@@ -96,6 +109,18 @@ function SignupForm({ signup }) {
                                     value={formData.email}
                                     onChange={handleChange}
                                 />
+                            </div>
+                            <div >
+                                <label style={{ height: "2rem" }}>
+                                    <input
+                                        type="checkbox"
+                                        name="isOwner"
+                                        // checked={formData.isOwner}
+                                        value={formData.isOwner}
+                                        onClick={handleCheckboxChange}
+                                    />
+                                    Owner
+                                </label>
                             </div>
 
                             {formErrors.length

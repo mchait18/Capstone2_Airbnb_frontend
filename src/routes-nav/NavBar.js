@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import UserContext from "../auth/UserContext";
 import "./NavBar.css";
-
+import AirbnbApi from "../AirbnbApi";
 /** Navigation bar for site. Shows up on every page.
  *
  * When user is logged in, shows links to main areas of site. When not,
@@ -13,7 +13,7 @@ import "./NavBar.css";
 
 function NavBar({ logout }) {
     const { currentUser } = useContext(UserContext)
-
+    console.log("current USER is ", currentUser)
     function loggedInNav() {
         return (
             <ul className="navbar-nav ml-auto">
@@ -27,12 +27,24 @@ function NavBar({ logout }) {
                         My Trips
                     </NavLink>
                 </li>
+                {currentUser.isOwner && <div>
+                    <li className="nav-item mr-4">
+                        <NavLink className="nav-link" to={`/properties/listings/${AirbnbApi.token}`} >
+                            My Listings
+                        </NavLink>
+                    </li></div>}
+                {currentUser.isOwner && <div>
+                    <li className="nav-item mr-4">
+                        <NavLink className="nav-link" to="/properties/new" >
+                            Post a Listing
+                        </NavLink>
+                    </li></div>}
                 <li className="nav-item mr-4">
                     <NavLink className="nav-link" to="/profile">
                         Profile
                     </NavLink>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item mr-4">
                     <Link className="nav-link" to="/" onClick={logout}>
                         Log out {currentUser.first_name || currentUser.username}
                     </Link>

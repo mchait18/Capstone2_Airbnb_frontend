@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-import "./PropertyCard.css"
 import Card from 'react-bootstrap/Card';
 import CardImgOverlay from 'react-bootstrap/CardImgOverlay';
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -19,7 +18,7 @@ const PropertyCard = ({ property, checkIn, checkOut, isFavorite, toggleFavorites
 
     async function handleSubmit(e) {
         e.preventDefault();
-        toggleFavorites({
+        await toggleFavorites({
             propertyId: property.listing.id,
             imageUrl: property.listing.contextualPictures[0].picture,
             propertyName: property.listing.name,
@@ -31,7 +30,7 @@ const PropertyCard = ({ property, checkIn, checkOut, isFavorite, toggleFavorites
         <Link style={{ textDecoration: 'none' }}
             to={`/properties/${property.listing.id}?checkIn=${checkIn}&checkOut=${checkOut}`} >
             <Card border="white" >
-                <Card inverse border="white" >
+                <Card border="white" >
                     <Card.Img variant="top" style={{ height: '15rem', width: '15rem' }} src={property.listing.contextualPictures[0].picture} />
                     <CardImgOverlay>
                         <div onClick={handleSubmit}>

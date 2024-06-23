@@ -15,7 +15,7 @@ import Row from 'react-bootstrap/Row';
  */
 
 function PropertyList({ properties, checkIn, checkOut, favorites, toggleFavorites }) {
-    console.log("in ProperyList, properties is ", properties)
+    // console.log("in ProperyList, properties is ", properties)
 
     if (!properties) return <LoadingSpinner />;
 

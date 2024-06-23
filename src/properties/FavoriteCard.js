@@ -12,7 +12,7 @@ import CardImgOverlay from 'react-bootstrap/CardImgOverlay';
  * FavoriteList -> FavoriteCard
  */
 
-const FavoriteCard = ({ propertyId, propertyName, rating, title, imageUrl }) => {
+const FavoriteCard = ({ propertyId, propertyName, rating, imageUrl }) => {
 
     const [isFavorite, setIsFavorite] = useState(true);
     async function toggleFavorites(favoriteData) {
@@ -30,7 +30,7 @@ const FavoriteCard = ({ propertyId, propertyName, rating, title, imageUrl }) => 
         <Link style={{ textDecoration: 'none' }}
             to={`/properties/${propertyId}`} >
             <Card border="white" style={{ width: '15rem' }} >
-                <Card inverse border="white">
+                <Card border="white">
                     <Card.Img border="white" variant="top" style={{ width: '10rem', height: '10rem' }} src={imageUrl} />
                     <CardImgOverlay>
                         <div onClick={handleSubmit}>
