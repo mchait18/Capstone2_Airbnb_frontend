@@ -12,8 +12,12 @@ import "bootstrap-icons/font/bootstrap-icons.css";
  * ListingsList -> ListingCard
  */
 
-const ListingCard = ({ listing }) => {
+const ListingCard = ({ listing, deleteListing }) => {
     // console.log("in ListingCard listing is ", listing)
+    async function handleSubmit(e) {
+        e.preventDefault();
+        await deleteListing(listing.propertyId)
+    }
 
     return (
         <Link style={{ textDecoration: 'none' }}
@@ -26,6 +30,9 @@ const ListingCard = ({ listing }) => {
                     <Card.Title>{listing.city}</Card.Title>
                     <Card.Text>
                         ${listing.pricePerNight} per night
+                        <div onClick={handleSubmit}>
+                            <i class="bi bi-trash" style={{ fontSize: "23px" }}></i>
+                        </div>
                     </Card.Text>
                 </Card.Body>
             </Card>

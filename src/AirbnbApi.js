@@ -63,6 +63,12 @@ class AirbnbApi {
         let res = await this.request(`properties/listing/${propertyId}`);
         return res.listing;
     }
+
+    //delete a listing
+    static async deleteListing(propertyId) {
+        let res = await this.request(`properties/listing/${propertyId}`, {}, "delete");
+        return res.listing;
+    }
     /** Get list of all properties. */
     static async getProperties(searchData) {
         let res = await this.request("properties", searchData);

@@ -25,13 +25,13 @@ function RouteList({ login, signup }) {
                 <Route exact path="/properties" element={<PropertyListRoute />} />
                 <Route exact path="/properties/new" element={<NewPropertyForm />} />
                 <Route exact path="/properties/listings/:token" element={<ListingsList />} />
-                <Route exact path="/properties/favorites" element={<PrivateRoute><FavoritesList /></PrivateRoute>} />
-                <Route exact path="/bookings" element={<PrivateRoute><BookingList /></PrivateRoute>} />
+                <Route exact path="/properties/favorites" element={<FavoritesList />} />
+                <Route exact path="/bookings" element={<BookingList />} />
                 <Route exact path="/properties/reviews/:propertyId" element={<PropertyReviews />} />
                 <Route exact path="/properties/:propertyId" element={<PropertyDetail />} />
-                <Route exact path="/properties/listing/:propertyId" element={<PrivateRoute><ListingDetail /></PrivateRoute>} />
-                <Route exact path="/bookings/:bookingId" element={<PrivateRoute>< BookingDetail /></PrivateRoute>} />
-                <Route exact path="/profile" element={<PrivateRoute><ProfileForm /></PrivateRoute>} />
+                <Route exact path="/properties/listing/:propertyId" element={<ListingDetail />} />
+                <Route exact path="/bookings/:bookingId" element={< BookingDetail />} />
+                <Route exact path="/profile" element={<ProfileForm />} />
                 <Route element={<Navigate to="/" />} />
             </Routes >
         </main>

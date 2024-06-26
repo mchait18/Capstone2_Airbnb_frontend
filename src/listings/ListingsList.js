@@ -35,6 +35,11 @@ function ListingsList() {
         getListingsOnMount()
     }, [])
 
+    async function deleteListing(propertyId) {
+        await AirbnbApi.deleteListing(propertyId);
+        setListings(await AirbnbApi.getListings(AirbnbApi.token))
+    }
+
     if (!listings) return <LoadingSpinner />;
 
     return (
@@ -43,7 +48,9 @@ function ListingsList() {
                 <Row xs={2} md={3} lg={4} xl={4} xxl={6} className="g-4" style={{ padding: '2rem', paddingTop: '2rem' }}>
                     {listings.map(listing => (
                         <Col key={listing.propertyId}>
-                            <ListingCard listing={listing} />
+                            <ListingCard
+                                listing={listing}
+                                deleteListing={deleteListing} />
                         </Col>
                     ))}
                 </Row>

@@ -32,13 +32,10 @@ function SignupForm({ signup }) {
     }
 
     const handleCheckboxChange = (e) => {
-        console.log("handleCheckboxChange, before set formdata.isOwner is ", formData.isOwner)
-        // setIsChecked(!isChecked);
-
         setFormData(formData => ({
             ...formData, isOwner: !formData.isOwner
         }))
-        console.log("handleCheckboxChange after set formdata.isOwner is ", formData.isOwner)
+        // console.log("handleCheckboxChange after set formdata.isOwner is ", formData.isOwner)
     };
 
     async function handleSubmit(e) {
