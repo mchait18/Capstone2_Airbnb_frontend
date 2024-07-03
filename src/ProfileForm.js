@@ -15,13 +15,6 @@ function ProfileForm() {
     const [formErrors, setFormErrors] = useState([]);
     const [formCompleted, setFormCompleted] = useState(false);
 
-    // console.debug(
-    //     "SignupForm",
-    //     "signup=", typeof signup,
-    //     "formData=", formData,
-    //     "formErrors=", formErrors,
-    // );
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(formData => ({
@@ -66,7 +59,7 @@ function ProfileForm() {
     //if form is submitted, redirect to home page. Otherwise, load form
     return (
         <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
-            <h3>Profile</h3>
+            <h3 className="mt-5">Profile</h3>
             <div className="card">
                 <div className="card-body">
                     <form onSubmit={handleSubmit}>
@@ -127,7 +120,7 @@ function ProfileForm() {
                             : null}
                         <button
                             type="submit"
-                            className="btn btn-primary btn-block mt-4"
+                            className="btn btn-secondary btn-block mt-4"
                         >
                             Save Changes
                         </button>

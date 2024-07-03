@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import LoadingSpinner from "../common/LoadingSpinner";
 import AirbnbApi from "../AirbnbApi";
 import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image';

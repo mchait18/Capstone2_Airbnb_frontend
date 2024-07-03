@@ -10,6 +10,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import Alert from "../common/Alert";
 
 function PropertyDetail() {
     const [formErrors, setFormErrors] = useState([]);
@@ -81,49 +82,52 @@ function PropertyDetail() {
 
     return (
         <div>
-            <Container fluid>
-                <Row>
-                    <Col key="0" >
-                        <Card border="white" style={{ width: '30rem', height: '30rem' }}>
-                            <Card.Title><h2>{property.sections.title.title}</h2></Card.Title>
-                            <Card.Img variant="top" src={property.imageUrl} />
-                            <Card.Body>
-                                <Card.Title>{property.title}</Card.Title>
-                                <Card.Text>
-                                    <Button variant="light" onClick={() =>
-                                        // setModalShow(true)
-                                        navigate(`/properties/reviews/${propertyId}`)
-                                    }>
-                                        {property.bookingData.reviewsCount} reviews
-                                    </Button>
-                                    <MyVerticallyCenteredModal
-                                        show={modalShow}
-                                        onHide={() => setModalShow(false)}
-                                    />
-                                </Card.Text>
-                            </Card.Body>
-                            <Card.Img style={{ height: '5rem', width: '5rem' }} src={property.bookingData.hostProfilePhotoUrl} />
-                            <Card.Text>Hosted by {property.bookingData.hostName}</Card.Text>
-                        </Card>
-                    </Col>
-                    <Col key="1" >
-                        <Card style={{ width: '40rem' }} border="white" >
-                            <div className='mt-5 pt-4'>
-                                <ImageCarousel
-                                    photos={property.sections.photoTour.mediaItems}
-                                    title="" />
-                            </div>
-                            <Card.Body>
-                                <BookingForm
-                                    propertyId={propertyId}
-                                    checkIn={checkIn}
-                                    checkOut={checkOut}
-                                    createBooking={createBooking} />
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
-            </Container>
+            {formErrors.length
+                ? <Alert type="danger" messages={formErrors} />
+                :
+                <Container fluid>
+                    <Row>
+                        <Col key="0" >
+                            <Card border="white" style={{ width: '30rem', height: '30rem' }}>
+                                <Card.Title><h2>{property.sections.title.title}</h2></Card.Title>
+                                <Card.Img variant="top" src={property.imageUrl} />
+                                <Card.Body>
+                                    <Card.Title>{property.title}</Card.Title>
+                                    <Card.Text>
+                                        <Button variant="light" onClick={() =>
+                                            // setModalShow(true)
+                                            navigate(`/properties/reviews/${propertyId}`)
+                                        }>
+                                            {property.bookingData.reviewsCount} reviews
+                                        </Button>
+                                        <MyVerticallyCenteredModal
+                                            show={modalShow}
+                                            onHide={() => setModalShow(false)}
+                                        />
+                                    </Card.Text>
+                                </Card.Body>
+                                <Card.Img style={{ height: '5rem', width: '5rem' }} src={property.bookingData.hostProfilePhotoUrl} />
+                                <Card.Text>Hosted by {property.bookingData.hostName}</Card.Text>
+                            </Card>
+                        </Col>
+                        <Col key="1" >
+                            <Card style={{ width: '40rem' }} border="white" >
+                                <div className='mt-5 pt-4'>
+                                    <ImageCarousel
+                                        photos={property.sections.photoTour.mediaItems}
+                                        title="" />
+                                </div>
+                                <Card.Body>
+                                    <BookingForm
+                                        propertyId={propertyId}
+                                        checkIn={checkIn}
+                                        checkOut={checkOut}
+                                        createBooking={createBooking} />
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>}
         </div >
     );
 }

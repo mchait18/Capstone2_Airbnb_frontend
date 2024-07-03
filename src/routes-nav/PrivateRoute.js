@@ -9,7 +9,7 @@ import UserContext from "../auth/UserContext";
  * route if so. If no user is present, redirects to login form.
  */
 
-function PrivateRoute({ exact, path, children }) {
+function PrivateRoute({ children }) {
   const { currentUser } = useContext(UserContext);
 
   // console.debug(
@@ -22,11 +22,8 @@ function PrivateRoute({ exact, path, children }) {
   if (!currentUser) {
     return <Navigate to="/login" />;
   }
-
   return (
-      <Route exact={exact} path={path}>
-        {children}
-      </Route>
+    children
   );
 }
 

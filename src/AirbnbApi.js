@@ -120,8 +120,7 @@ class AirbnbApi {
     }
     //add/remove favorite
     static async toggleFavorites(token, favoriteData) {
-        let res = await this.request(`properties/favorites/${token}`, favoriteData, "post");
-        // return res.booking;
+        await this.request(`properties/favorites/${token}`, favoriteData, "post");
     }
     static async saveProfile(username, profileData) {
         let status = await this.checkPassword(username, profileData.password)

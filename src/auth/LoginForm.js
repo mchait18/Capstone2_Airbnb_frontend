@@ -11,13 +11,6 @@ function LoginForm({ login }) {
     const [formData, setFormData] = useState(INITIAL_STATE);
     const [formErrors, setFormErrors] = useState([]);
 
-    // console.debug(
-    //     "LoginForm",
-    //     "login=", typeof login,
-    //     "formData=", formData,
-    //     "formErrors=", formErrors,
-    // );
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(formData => ({
@@ -41,7 +34,7 @@ function LoginForm({ login }) {
     return (
         <div className="LoginForm">
             <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-                <h2 className="mb-3">Log in</h2>
+                <h2 className="mb-3, mt-5">Log in</h2>
                 <div className="card">
                     <div className="card-body">
                         <form onSubmit={handleSubmit}>
@@ -71,7 +64,7 @@ function LoginForm({ login }) {
                             }
                             <button
                                 type="submit"
-                                className="btn btn-primary float-right"
+                                className="btn btn-secondary float-right mt-3 mb-3"
                                 onSubmit={handleSubmit}
                             >
                                 Submit

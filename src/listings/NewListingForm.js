@@ -5,8 +5,8 @@ import AirbnbApi from "../AirbnbApi"
 import UserContext from "../auth/UserContext";
 import { v4 as uuid } from 'uuid';
 
-function PropertyForm() {
-    const { currentUser, setCurrentUser } = useContext(UserContext);
+function NewListingForm() {
+    const { currentUser } = useContext(UserContext);
     const [formData, setFormData] = useState({
         propertyName: "",
         title: "",
@@ -75,14 +75,13 @@ function PropertyForm() {
             setFormErrors(errors);
             return;
         }
-        // setFormData(f => ({ ...f, password: "" }));
         setFormErrors([]);
         setFormCompleted(true);
     }
     //if form is submitted, redirect to home page. Otherwise, load form
     return (
         <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
-            <h3>New Listing</h3>
+            <h3 className="mb-3, mt-3">New Listing</h3>
             <div className="card">
                 <div className="card-body">
                     <form onSubmit={handleSubmit}>
@@ -209,4 +208,4 @@ function PropertyForm() {
 }
 
 
-export default PropertyForm;
+export default NewListingForm;

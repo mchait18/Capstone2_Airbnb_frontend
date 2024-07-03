@@ -16,12 +16,6 @@ function SignupForm({ signup }) {
     }
     const [formData, setFormData] = useState(INITIAL_STATE);
     const [formErrors, setFormErrors] = useState([]);
-    // console.debug(
-    //     "SignupForm",
-    //     "signup=", typeof signup,
-    //     "formData=", formData,
-    //     "formErrors=", formErrors,
-    // );
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -35,7 +29,6 @@ function SignupForm({ signup }) {
         setFormData(formData => ({
             ...formData, isOwner: !formData.isOwner
         }))
-        // console.log("handleCheckboxChange after set formdata.isOwner is ", formData.isOwner)
     };
 
     async function handleSubmit(e) {
@@ -55,7 +48,7 @@ function SignupForm({ signup }) {
     return (
         <div className="SignupForm">
             <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-                <h2 className="mb-3">Sign Up</h2>
+                <h2 className="mb-3, mt-5">Sign Up</h2>
                 <div className="card">
                     <div className="card-body">
                         <form onSubmit={handleSubmit}>
@@ -66,6 +59,7 @@ function SignupForm({ signup }) {
                                     className="form-control"
                                     value={formData.username}
                                     onChange={handleChange}
+                                    required
                                 />
                             </div>
                             <div className="form-group">
@@ -76,6 +70,7 @@ function SignupForm({ signup }) {
                                     className="form-control"
                                     value={formData.password}
                                     onChange={handleChange}
+                                    required
                                 />
                             </div>
 
@@ -86,6 +81,7 @@ function SignupForm({ signup }) {
                                     className="form-control"
                                     value={formData.firstName}
                                     onChange={handleChange}
+                                    required
                                 />
                             </div>
                             <div className="form-group">
@@ -95,6 +91,7 @@ function SignupForm({ signup }) {
                                     className="form-control"
                                     value={formData.lastName}
                                     onChange={handleChange}
+                                    required
                                 />
                             </div>
                             <div className="form-group">
@@ -105,18 +102,18 @@ function SignupForm({ signup }) {
                                     className="form-control"
                                     value={formData.email}
                                     onChange={handleChange}
+                                    required
                                 />
                             </div>
                             <div >
-                                <label style={{ height: "2rem" }}>
-                                    <input
-                                        type="checkbox"
-                                        name="isOwner"
-                                        // checked={formData.isOwner}
-                                        value={formData.isOwner}
-                                        onClick={handleCheckboxChange}
-                                    />
-                                    Owner
+                                <label style={{ height: "2rem" }}> Owner  <input
+                                    type="checkbox"
+                                    className="mt-3"
+                                    name="isOwner"
+                                    value={formData.isOwner}
+                                    onClick={handleCheckboxChange}
+                                />
+
                                 </label>
                             </div>
 
@@ -126,7 +123,7 @@ function SignupForm({ signup }) {
                             }
                             <button
                                 type="submit"
-                                className="btn btn-primary float-right"
+                                className="btn btn-secondary float-right mt-3"
                             >
                                 Submit
                             </button>

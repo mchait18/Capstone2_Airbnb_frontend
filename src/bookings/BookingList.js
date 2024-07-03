@@ -1,10 +1,9 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Container from 'react-bootstrap/Container';
 import BookingCard from "./BookingCard"
 import LoadingSpinner from "../common/LoadingSpinner";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-// import UserContext from "../auth/UserContext";
 import AirbnbApi from "../AirbnbApi";
 import Alert from "../common/Alert";
 
@@ -43,13 +42,17 @@ function BookingList() {
                 ? <Alert type="danger" messages={["Please fill out all required fields"]} />
                 :
                 <Container fluid>
-                    <Row xs={2} md={3} lg={4} xl={6} xxl={7} className="g-4" style={{ padding: '2rem', paddingTop: '2rem' }}>
-                        {bookings.map(booking => (
-                            <Col key={booking.id}>
-                                <BookingCard bookingId={booking.id} />
-                            </Col>
-                        ))}
-                    </Row>
+                    {bookings.length ?
+                        <Row xs={2} md={3} lg={4} xl={6} xxl={7} className="g-4" style={{ padding: '2rem', paddingTop: '2rem' }}>
+                            {bookings.map(booking => (
+                                <Col key={booking.id}>
+                                    <BookingCard bookingId={booking.id} />
+                                </Col>
+                            ))}
+                        </Row>
+                        :
+                        <Row className="g-4" style={{ padding: '2rem', paddingTop: '2rem' }}>
+                            <p>No trips yet.</p></Row>}
                 </Container>}
         </div>
     )

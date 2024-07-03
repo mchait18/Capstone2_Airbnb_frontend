@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import AirbnbApi from "../AirbnbApi";
 import Container from 'react-bootstrap/Container';
 import ListingCard from "../listings/ListingCard"
 import LoadingSpinner from "../common/LoadingSpinner";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-
+import Alert from "../common/Alert";
 
 /** Show page with list of user's listings.
  *
@@ -44,17 +44,24 @@ function ListingsList() {
 
     return (
         <div>
-            <Container fluid>
-                <Row xs={2} md={3} lg={4} xl={4} xxl={6} className="g-4" style={{ padding: '2rem', paddingTop: '2rem' }}>
-                    {listings.map(listing => (
-                        <Col key={listing.propertyId}>
-                            <ListingCard
-                                listing={listing}
-                                deleteListing={deleteListing} />
-                        </Col>
-                    ))}
-                </Row>
-            </Container>
+            {formErrors.length
+                ? <Alert type="danger" messages={formErrors} />
+                :
+                <Container fluid>
+                    {listings.length ?
+                        <Row xs={2} md={3} lg={4} xl={4} xxl={6} className="g-4" style={{ padding: '2rem', paddingTop: '2rem' }}>
+                            {listings.map(listing => (
+                                <Col key={listing.propertyId}>
+                                    <ListingCard
+                                        listing={listing}
+                                        deleteListing={deleteListing} />
+                                </Col>
+                            ))}
+                        </Row>
+                        :
+                        <Row className="g-4" style={{ padding: '2rem', paddingTop: '2rem' }}>
+                            <p>No listings yet.</p></Row>}
+                </Container>}
         </div>
     )
 

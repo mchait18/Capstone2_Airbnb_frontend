@@ -1,10 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useParams, Link, useLocation, useNavigate } from "react-router-dom";
-import ImageCarousel from "../properties/ImageCarousel"
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from "react-router-dom";
 import AirbnbApi from "../AirbnbApi";
-import BookingForm from '../bookings/BookingForm';
 import Card from 'react-bootstrap/Card';
-import UserContext from "../auth/UserContext";
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -12,11 +9,9 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 function ListingDetail() {
-    const [formErrors, setFormErrors] = useState([]);
     const navigate = useNavigate();
     const { propertyId } = useParams()
     const [listing, setListing] = useState(null);
-    const { currentUser } = useContext(UserContext);
     const [modalShow, setModalShow] = React.useState(false);
 
     useEffect(() => {

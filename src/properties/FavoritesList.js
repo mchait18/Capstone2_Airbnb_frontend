@@ -1,10 +1,9 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Container from 'react-bootstrap/Container';
 import FavoriteCard from "./FavoriteCard"
 import LoadingSpinner from "../common/LoadingSpinner";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-// import UserContext from "../auth/UserContext";
 import AirbnbApi from "../AirbnbApi";
 import Alert from "../common/Alert";
 
@@ -40,22 +39,27 @@ function FavoritesList() {
     return (
         <div>
             {formErrors.length
-                ? <Alert type="danger" messages={["Please fill out all required fields"]} />
+                ? <Alert type="danger" messages={formErrors} />
                 :
                 <Container fluid>
-                    <Row xs={2} md={3} lg={4} xl={6} xxl={7} className="g-4" style={{ padding: '2rem', paddingTop: '2rem' }}>
-                        {favorites.map(favorite => (
-                            <Col key={favorite.propertyId}>
-                                <FavoriteCard
-                                    propertyId={favorite.propertyId}
-                                    propertyName={favorite.propertyName}
-                                    rating={favorite.rating}
-                                    // title={favorite.title}
-                                    imageUrl={favorite.imageUrl}
-                                />
-                            </Col>
-                        ))}
-                    </Row>
+                    {favorites.length ?
+                        <Row xs={2} md={3} lg={4} xl={6} xxl={7} className="g-4" style={{ padding: '2rem', paddingTop: '2rem' }}>
+                            {
+                                favorites.map(favorite => (
+                                    <Col key={favorite.propertyId}>
+                                        <FavoriteCard
+                                            propertyId={favorite.propertyId}
+                                            propertyName={favorite.propertyName}
+                                            rating={favorite.rating}
+                                            imageUrl={favorite.imageUrl}
+                                        />
+                                    </Col>
+                                ))
+                            }
+                        </Row>
+                        :
+                        <Row className="g-4" style={{ padding: '2rem', paddingTop: '2rem' }}>
+                            <p>No favorites yet.</p></Row>}
                 </Container>}
         </div>
     )
