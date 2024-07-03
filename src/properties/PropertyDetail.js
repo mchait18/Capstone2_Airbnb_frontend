@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams, Link, useLocation, useNavigate } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import ImageCarousel from "./ImageCarousel"
 import AirbnbApi from "../AirbnbApi";
 import BookingForm from '../bookings/BookingForm';

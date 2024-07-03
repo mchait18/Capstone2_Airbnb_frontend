@@ -20,7 +20,7 @@ class AirbnbApi {
         //this has been provided to show you another way to pass the token. you are only expected to read this code for this project.
         const url = `${BASE_URL}/${endpoint}`;
         const headers = { Authorization: `Bearer ${localStorage.getItem("airbnb-token")}` };
-        console.log("headers is ", headers)
+        // console.log("headers is ", headers)
         const params = (method === "get")
             ? data
             : {};
@@ -99,7 +99,6 @@ class AirbnbApi {
         return res.user;
     }
     static async signup(signupData) {
-        console.log("in API func, signupdata is ", signupData)
         let res = await this.request("auth/register", signupData, "post");
         return res.token;
     }
@@ -113,7 +112,6 @@ class AirbnbApi {
     //gets users favorites
     static async getFavorites(token) {
         let res = await this.request(`properties/favorites/${token}`)
-        console.log()
         return res.favorites;
     }
     static async getFavorite(favoriteId) {

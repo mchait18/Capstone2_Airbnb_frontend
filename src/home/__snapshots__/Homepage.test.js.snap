@@ -1,0 +1,187 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="Homepage"
+  >
+    <div
+      class="container text-center"
+    >
+      <h1
+        class="mb-4 font-weight-bold"
+      >
+        Kosher Airbnb
+      </h1>
+      <p
+        class="lead"
+      >
+        Start your Vacation Now
+      </p>
+      <div
+        class="SearchForm mb-4"
+      >
+        <form
+          class="form-inline"
+        >
+          <label
+            for="location"
+          >
+            * Where
+          </label>
+          <input
+            class="form-control form-control-lg flex-grow-1"
+            id="location"
+            name="location"
+            placeholder="Search Destinations"
+            required=""
+            type="text"
+            value=""
+          />
+          <label
+            for="checkin"
+          >
+            * Check in
+          </label>
+          <input
+            class="form-control form-control-lg flex-grow-1"
+            id="checkin"
+            name="checkin"
+            placeholder="Add dates"
+            required=""
+            type="date"
+            value=""
+          />
+          <label
+            for="checkout"
+          >
+            * Check out
+          </label>
+          <input
+            class="form-control form-control-lg flex-grow-1"
+            id="checkout"
+            name="checkout"
+            placeholder="Add dates"
+            required=""
+            type="date"
+            value=""
+          />
+          <label
+            for="adults"
+          >
+            * Number of Guests
+          </label>
+          <input
+            class="form-control form-control-lg flex-grow-1"
+            id="adults"
+            name="adults"
+            placeholder="Add guests"
+            required=""
+            type="number"
+            value="1"
+          />
+          <button
+            class="btn btn-lg btn-primary"
+            type="submit"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`matches snapshot when logged out 1`] = `
+<DocumentFragment>
+  <div
+    class="Homepage"
+  >
+    <div
+      class="container text-center"
+    >
+      <h1
+        class="mb-4 font-weight-bold"
+      >
+        Kosher Airbnb
+      </h1>
+      <p
+        class="lead"
+      >
+        Start your Vacation Now
+      </p>
+      <div
+        class="SearchForm mb-4"
+      >
+        <form
+          class="form-inline"
+        >
+          <label
+            for="location"
+          >
+            * Where
+          </label>
+          <input
+            class="form-control form-control-lg flex-grow-1"
+            id="location"
+            name="location"
+            placeholder="Search Destinations"
+            required=""
+            type="text"
+            value=""
+          />
+          <label
+            for="checkin"
+          >
+            * Check in
+          </label>
+          <input
+            class="form-control form-control-lg flex-grow-1"
+            id="checkin"
+            name="checkin"
+            placeholder="Add dates"
+            required=""
+            type="date"
+            value=""
+          />
+          <label
+            for="checkout"
+          >
+            * Check out
+          </label>
+          <input
+            class="form-control form-control-lg flex-grow-1"
+            id="checkout"
+            name="checkout"
+            placeholder="Add dates"
+            required=""
+            type="date"
+            value=""
+          />
+          <label
+            for="adults"
+          >
+            * Number of Guests
+          </label>
+          <input
+            class="form-control form-control-lg flex-grow-1"
+            id="adults"
+            name="adults"
+            placeholder="Add guests"
+            required=""
+            type="number"
+            value="1"
+          />
+          <button
+            class="btn btn-lg btn-primary"
+            type="submit"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
