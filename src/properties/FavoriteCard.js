@@ -12,19 +12,14 @@ import CardImgOverlay from 'react-bootstrap/CardImgOverlay';
  * FavoriteList -> FavoriteCard
  */
 
-const FavoriteCard = ({ propertyId, propertyName, rating, imageUrl }) => {
+const FavoriteCard = ({ propertyId, propertyName, rating, imageUrl, toggleFavorites }) => {
 
     const [isFavorite, setIsFavorite] = useState(true);
-    async function toggleFavorites(favoriteData) {
-        await AirbnbApi.toggleFavorites(AirbnbApi.token, favoriteData)
-        isFavorite ? setIsFavorite(false) : setIsFavorite(true)
-    }
 
     async function handleSubmit(e) {
         e.preventDefault();
-        toggleFavorites({
-            propertyId: propertyId
-        })
+        toggleFavorites({ propertyId })
+        isFavorite ? setIsFavorite(false) : setIsFavorite(true)
     }
     return (
         <Link style={{ textDecoration: 'none' }}
@@ -39,11 +34,6 @@ const FavoriteCard = ({ propertyId, propertyName, rating, imageUrl }) => {
                                     <span><i className="bi bi-heart-fill text-danger" style={{ fontSize: "18px" }}></i></span>
                                 </div>
                             ) : null
-                                // (
-                                //     <div >
-                                //         <span><i className="bi bi-heart h6"></i></span>
-                                //     </div>
-                                // )
                             }</div>
                     </CardImgOverlay>
                 </Card>
@@ -51,8 +41,6 @@ const FavoriteCard = ({ propertyId, propertyName, rating, imageUrl }) => {
                     <Card.Title>{propertyName}
                     </Card.Title>
                     <Card.Text><i className="bi bi-star-fill" style={{ fontSize: "18px" }} ></i> {rating}</Card.Text>
-                    {/* <Card.Text>{title}
-                    </Card.Text> */}
                 </Card.Body>
             </Card>
         </Link>

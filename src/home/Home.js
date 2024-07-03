@@ -25,10 +25,11 @@ function Home() {
     }
     return (
         <div className="Homepage">
-            <div className="container text-center">
-                <h1 className="mb-4 font-weight-bold">Kosher Airbnb</h1>
-                <p className="lead">Start your Vacation Now</p>
+            <div className="container ">
+                <h1 className="mb-4 font-weight-bold text-center">Kosher Airbnb</h1>
+                <p className="lead text-center">Start your Vacation Now</p>
                 <SearchForm searchFor={searchFor} />
+                <p className="lead text-center"><i>* indicates required field</i></p>
             </div>
         </div>
     );

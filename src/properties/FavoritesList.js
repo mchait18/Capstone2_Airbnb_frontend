@@ -32,7 +32,11 @@ function FavoritesList() {
         }
         getFavoritesOnMount()
     }, [])
-    // console.log("in BookingList, bookings is ", bookings)
+
+    async function toggleFavorites(favoriteData) {
+        await AirbnbApi.toggleFavorites(AirbnbApi.token, favoriteData)
+        setFavorites(await AirbnbApi.getFavorites(AirbnbApi.token))
+    }
 
     if (!favorites) return <LoadingSpinner />;
 
@@ -52,6 +56,7 @@ function FavoritesList() {
                                             propertyName={favorite.propertyName}
                                             rating={favorite.rating}
                                             imageUrl={favorite.imageUrl}
+                                            toggleFavorites={toggleFavorites}
                                         />
                                     </Col>
                                 ))

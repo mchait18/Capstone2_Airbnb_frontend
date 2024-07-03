@@ -39,7 +39,7 @@ function LoginForm({ login }) {
                     <div className="card-body">
                         <form onSubmit={handleSubmit}>
                             <div className="form-group">
-                                <label>Username</label>
+                                <label>* Username</label>
                                 <input
                                     name="username"
                                     className="form-control"
@@ -48,7 +48,7 @@ function LoginForm({ login }) {
                                 />
                             </div>
                             <div className="form-group">
-                                <label>Password</label>
+                                <label>* Password</label>
                                 <input
                                     type="password"
                                     name="password"
@@ -75,6 +75,8 @@ function LoginForm({ login }) {
                     </div>
                 </div>
             </div>
+            <p className="lead text-center"><i>* indicates required field</i></p>
+
         </div>
     );
 }

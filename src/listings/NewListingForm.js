@@ -86,7 +86,7 @@ function NewListingForm() {
                 <div className="card-body">
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
-                            <label>Property Name</label>
+                            <label>* Property Name</label>
                             <input
                                 name="propertyName"
                                 className="form-control"
@@ -96,7 +96,7 @@ function NewListingForm() {
                             />
                         </div>
                         <div className="form-group">
-                            <label>Property Title</label>
+                            <label>* Property Title</label>
                             <input
                                 name="title"
                                 className="form-control"
@@ -106,7 +106,7 @@ function NewListingForm() {
                             />
                         </div>
                         <div className="form-group">
-                            <label>Photo</label>
+                            <label>* Photo</label>
                             <input
                                 name="imageUrl"
                                 className="form-control"
@@ -125,7 +125,7 @@ function NewListingForm() {
                             />
                         </div>
                         <div className="form-group">
-                            <label>Host Name</label>
+                            <label>* Host Name</label>
                             <input
                                 name="hostName"
                                 className="form-control"
@@ -134,7 +134,7 @@ function NewListingForm() {
                                 required
                             />
                         </div><div className="form-group">
-                            <label>Host Photo</label>
+                            <label>* Host Photo</label>
                             <input
                                 name="hostPhoto"
                                 className="form-control"
@@ -143,7 +143,7 @@ function NewListingForm() {
                                 required
                             />
                         </div><div className="form-group">
-                            <label>Number of Guests</label>
+                            <label>* Maximum Number of Guests</label>
                             <input
                                 name="adults"
                                 className="form-control"
@@ -152,7 +152,7 @@ function NewListingForm() {
                                 required
                             />
                         </div><div className="form-group">
-                            <label>Price Per Night</label>
+                            <label>* Price Per Night</label>
                             <input
                                 name="pricePerNight"
                                 className="form-control"
@@ -169,7 +169,7 @@ function NewListingForm() {
                                 onChange={handleChange}
                             />
                         </div><div className="form-group">
-                            <label>Location</label>
+                            <label>* Location</label>
                             <input
                                 name="city"
                                 className="form-control"
@@ -178,7 +178,7 @@ function NewListingForm() {
                                 required
                             />
                         </div><div className="form-group">
-                            <label>Property Type</label>
+                            <label>* Property Type</label>
                             <input
                                 name="propertyType"
                                 className="form-control"
@@ -196,13 +196,14 @@ function NewListingForm() {
                             : null}
                         <button
                             type="submit"
-                            className="btn btn-primary btn-block mt-4"
+                            className="btn btn-secondary btn-block mt-4"
                         >
                             Submit
                         </button>
                     </form>
                 </div>
             </div>
+            <p className="lead text-center"><i>* indicates required field</i></p>
         </div>
     )
 }

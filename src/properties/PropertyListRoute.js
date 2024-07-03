@@ -40,7 +40,6 @@ function ProperyListRoute() {
         if (!currentUser) {
             navigate('/login')
         } else {
-            console.log("favorites!!! are ", favorites)
             await AirbnbApi.toggleFavorites(AirbnbApi.token, favoriteData);
             setFavorites(await AirbnbApi.getFavorites(AirbnbApi.token))
         }
@@ -52,7 +51,7 @@ function ProperyListRoute() {
     return (
         <div >
             {formErrors.length
-                ? <Alert type="danger" messages={["Please fill out all required fields"]} />
+                ? <Alert type="danger" messages={formErrors} />
                 : < PropertyList properties={properties} checkIn={checkin}
                     checkOut={checkout}
                     favorites={favorites}

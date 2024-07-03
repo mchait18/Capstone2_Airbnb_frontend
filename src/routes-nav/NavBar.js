@@ -71,7 +71,7 @@ function NavBar({ logout }) {
     }
     return (
         <nav className="Navigation navbar navbar-expand-md">
-            <Link className="navbar-brand" to="/">
+            <Link className="navbar-brand m-2" to="/">
                 Kosher Airbnb
             </Link>
             {currentUser ? loggedInNav() : loggedOutNav()}

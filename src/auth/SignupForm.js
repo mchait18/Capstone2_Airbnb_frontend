@@ -53,7 +53,7 @@ function SignupForm({ signup }) {
                     <div className="card-body">
                         <form onSubmit={handleSubmit}>
                             <div className="form-group">
-                                <label>Username</label>
+                                <label>* Username</label>
                                 <input
                                     name="username"
                                     className="form-control"
@@ -63,7 +63,7 @@ function SignupForm({ signup }) {
                                 />
                             </div>
                             <div className="form-group">
-                                <label>Password</label>
+                                <label>* Password</label>
                                 <input
                                     type="password"
                                     name="password"
@@ -75,7 +75,7 @@ function SignupForm({ signup }) {
                             </div>
 
                             <div className="form-group">
-                                <label>First name</label>
+                                <label>* First name</label>
                                 <input
                                     name="firstName"
                                     className="form-control"
@@ -85,7 +85,7 @@ function SignupForm({ signup }) {
                                 />
                             </div>
                             <div className="form-group">
-                                <label>Last name</label>
+                                <label>* Last name</label>
                                 <input
                                     name="lastName"
                                     className="form-control"
@@ -95,7 +95,7 @@ function SignupForm({ signup }) {
                                 />
                             </div>
                             <div className="form-group">
-                                <label>Email</label>
+                                <label>* Email</label>
                                 <input
                                     type="email"
                                     name="email"
@@ -130,6 +130,8 @@ function SignupForm({ signup }) {
                         </form>
                     </div>
                 </div>
+                <p className="lead text-center"><i>* indicates required field</i></p>
+
             </div>
         </div>
     );
