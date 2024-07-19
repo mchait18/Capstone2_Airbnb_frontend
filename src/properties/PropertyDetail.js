@@ -53,29 +53,6 @@ function PropertyDetail() {
         setFormErrors([]);
     }
 
-    function MyVerticallyCenteredModal(props) {
-        return (
-            <Modal
-                {...props}
-                size="lg"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter">
-                        Reviews
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    {/* <h4>Centered Modal</h4> */}
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button onClick={props.onHide}>Close</Button>
-                </Modal.Footer>
-            </Modal>
-        );
-    }
-
     if (!property) {
         return <p>Loading &hellip;</p>;
     }
@@ -95,15 +72,10 @@ function PropertyDetail() {
                                     <Card.Title>{property.title}</Card.Title>
                                     <Card.Text>
                                         <Button variant="light" onClick={() =>
-                                            // setModalShow(true)
                                             navigate(`/properties/reviews/${propertyId}`)
                                         }>
                                             {property.bookingData.reviewsCount} reviews
                                         </Button>
-                                        <MyVerticallyCenteredModal
-                                            show={modalShow}
-                                            onHide={() => setModalShow(false)}
-                                        />
                                     </Card.Text>
                                 </Card.Body>
                                 <Card.Img style={{ height: '5rem', width: '5rem' }} src={property.bookingData.hostProfilePhotoUrl} />
